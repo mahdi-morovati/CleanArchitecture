@@ -4,10 +4,8 @@ using CleanArchitecture.Infrastructure.Data;
 using CleanArchitecture.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
-#if (UseApiOnly)
 using NSwag;
 using NSwag.Generation.Processors.Security;
-#endif
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -38,7 +36,6 @@ public static class DependencyInjection
         {
             configure.Title = "CleanArchitecture API";
 
-#if (UseApiOnly)
             // Add JWT
             configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
             {
@@ -49,7 +46,6 @@ public static class DependencyInjection
             });
 
             configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-#endif
         });
 
         return services;

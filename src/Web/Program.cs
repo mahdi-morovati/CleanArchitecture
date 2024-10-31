@@ -8,7 +8,6 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
-// builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -43,9 +42,7 @@ app.MapFallbackToFile("index.html");
 
 app.UseExceptionHandler(options => { });
 
-#if (UseApiOnly)
 app.Map("/", () => Results.Redirect("/api"));
-#endif
 
 app.MapEndpoints();
 
